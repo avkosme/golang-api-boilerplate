@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  app:
+    volumes:
+     - ./:/root
+    working_dir: /root
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    command: bin/./app
+    env_file: .env
+    depends_on:
+     - mongo
+     - redis
+
+  mongo:
+    image: mongo
+    env_file: .env
+
+  mongo-test:
+    image: mongo
+    env_file: .env
+
+  redis:
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/opt/swagger.json
+    volumes:
+      - ./docs/swagger.json:/opt/swagger.json

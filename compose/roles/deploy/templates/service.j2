@@ -1,0 +1,14 @@
+[Unit]
+Description={{ playbook_dir | dirname | basename }} daemon
+After=network.target
+
+[Service]
+User=root
+Group=nginx
+Restart=always
+WorkingDirectory=/opt/{{ playbook_dir | dirname | basename }}/
+ExecStart=/opt/{{ playbook_dir | dirname | basename }}/app
+EnvironmentFile=/etc/profile.d/{{ playbook_dir | dirname | basename }}.env
+
+[Install]
+WantedBy=multi-user.target

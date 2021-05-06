@@ -1,0 +1,14 @@
+---
+- name: Create .env file
+  template:
+    src: .env.j2
+    dest: "{{ playbook_dir }}/../.env"
+  when: connection == "local"
+
+
+- name: Copy docker-compose.override.yml
+  copy:
+    src: docker-compose.override.yml
+    dest: "{{ playbook_dir }}/../docker-compose.override.yml"
+  when: connection == "local"
+

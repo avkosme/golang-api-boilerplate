@@ -1,0 +1,74 @@
+
+server {
+    charset utf-8;
+    client_max_body_size 128M;
+
+    listen 1200;
+    root /var/www;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_static on;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+
+
+    access_log /var/log/nginx/ws.access.log;
+    error_log /var/log/nginx/ws.error.log;
+
+    location / {
+      proxy_pass http://golang:1200;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "Upgrade";
+      proxy_set_header Host $host;
+    }
+
+}
+
+
+
+server {
+    listen 80;
+    server_name {{ ENVIRONMENT.HOSTNAME }};
+    return 301 https://$host;
+    }
+
+
+server {
+    charset utf-8;
+    client_max_body_size 128M;
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name {{ ENVIRONMENT.HOSTNAME }};
+
+    root /var/www;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_static on;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ssl_certificate /etc/nginx/ssl/{{ ENVIRONMENT.HOSTNAME }}.crt;
+    ssl_certificate_key /etc/nginx/ssl/{{ ENVIRONMENT.HOSTNAME }}.key;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    access_log /var/log/nginx/{{ ENVIRONMENT.HOSTNAME }}.access.log;
+    error_log /var/log/nginx/{{ ENVIRONMENT.HOSTNAME }}.error.log;
+
+
+    location ~ /\.(ht|svn|git) {
+        deny all;
+    }
+}
+

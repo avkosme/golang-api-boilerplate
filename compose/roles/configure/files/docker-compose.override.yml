@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+
+  mongo:
+    ports:
+      - 27017:27017
+
+  swagger:
+    ports:
+      - 8787:8080

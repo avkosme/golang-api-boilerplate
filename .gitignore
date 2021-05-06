@@ -1,0 +1,9 @@
+node_modules/
+/docker-compose.override.yml
+.env
+docker/nginx/sites-enabled/
+docker/nginx/nginx.conf
+.cache/
+vendor/
+.idea/
+.ash_history

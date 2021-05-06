@@ -1,0 +1,6 @@
+---
+- hosts:
+    - all
+    - local
+  roles:
+    - configure

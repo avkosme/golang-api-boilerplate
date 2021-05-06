@@ -1,0 +1,37 @@
+---
+- name: Create app directory
+  file:
+    path: "/opt/{{ playbook_dir | dirname | basename }}"
+    state: directory
+
+
+- name: Create .env file
+  template:
+    src: .env.j2
+    dest: "/etc/profile.d/{{ playbook_dir | dirname | basename }}.env"
+
+
+- name: Copy bin file
+  copy:
+    src: "{{ playbook_dir }}/../bin/app"
+    dest: "/opt/{{ playbook_dir | dirname | basename }}/"
+    owner: root
+    group: wheel
+    mode: 0777
+
+
+- name: Create service config file
+  template:
+    src: service.j2
+    dest: "/etc/systemd/system/{{ playbook_dir | dirname | basename }}.service"
+    owner: root
+    group: wheel
+    mode: 0644
+
+
+- name: Make sure service is running
+  systemd:
+    state: restarted
+    name: "{{ playbook_dir | dirname | basename }}.service"
+    enabled: yes
+    daemon_reload: yes

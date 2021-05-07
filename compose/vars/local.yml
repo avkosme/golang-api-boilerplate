@@ -7,7 +7,7 @@ ENVIRONMENT:
   BOT_BIND_ADDRESS: 0.0.0.0
   BOT_ADDRESS:
   BOT_ID:
-  BOT_PORT:
+  BOT_PORT: 8080
   BOT_CERT_PATH: /root/compose/roles/configure/files/cert/local/cert.pem
   BOT_KEY_PATH: /root/compose/roles/configure/files/cert/local/cert.key
   LOG_PATH: /go/tg-bot.log

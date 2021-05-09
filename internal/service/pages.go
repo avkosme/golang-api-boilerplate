@@ -1,4 +1,4 @@
-package service
+package pages
 
 func Manage(command string) (result bool) {
 

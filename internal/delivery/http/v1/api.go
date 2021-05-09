@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/avkosme/golang-api-boilerplate/internal/config"
+	pages "github.com/avkosme/golang-api-boilerplate/internal/service"
 	"github.com/avkosme/golang-api-boilerplate/pkg/logger"
 	"github.com/julienschmidt/httprouter"
 )
@@ -48,10 +49,9 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	message := httpObj.parse()
 
-	switch message.Message.Text {
-	case "/pages":
+	if true == pages.Manage(message.Message.Text) {
 		w.WriteHeader(http.StatusOK)
-	default:
+	} else {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 }

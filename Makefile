@@ -9,7 +9,7 @@ test:
 	docker-compose up -d mongo-test
 	docker-compose up -d redis
 	docker-compose up -d app
-	docker-compose exec app go test -count=1 -v ./...
+	docker-compose exec -T app go test -count=1 -v ./...
 	docker-compose stop
 build:
 	cd compose && ansible-playbook -i hosts.yml configure.yml -e @vars/test.yml --limit local

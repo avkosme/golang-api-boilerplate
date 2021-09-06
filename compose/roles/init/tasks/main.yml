@@ -1,0 +1,7 @@
+---
+- name: Create docker-compose.override.yml
+  template:
+    src: docker-compose.override.yml.j2
+    dest: '{{ playbook_dir }}/../docker-compose.override.yml'
+  when: connection == "local"
+

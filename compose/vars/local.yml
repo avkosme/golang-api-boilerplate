@@ -10,9 +10,4 @@ ENVIRONMENT:
   BOT_PORT: 8080
   BOT_CERT_PATH: /root/compose/roles/configure/files/cert/local/cert.pem
   BOT_KEY_PATH: /root/compose/roles/configure/files/cert/local/cert.key
-  LOG_PATH: /go/tg-bot.log
-  REDIS_ADDRESS: redis:6379
-  MONGO_ADDRESS: mongo
-  MONGO_INITDB_ROOT_USERNAME: root
-  MONGO_INITDB_ROOT_PASSWORD: password
-  MONGO_DATABASE: database
+  LOG_PATH: /var/log/app.log

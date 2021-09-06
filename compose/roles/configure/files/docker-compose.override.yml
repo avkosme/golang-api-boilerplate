@@ -1,11 +1,14 @@
-version: "3.8"
+version: "3.9"
 
 services:
-
-  mongo:
+  app:
+    command: bin/./app
+    env_file: .env
+    volumes:
+     - ./:/root
+    working_dir: /root
     ports:
-      - 27017:27017
-
+     - 8080:8080
   swagger:
     ports:
       - 8787:8080

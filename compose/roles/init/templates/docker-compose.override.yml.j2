@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  app:
+    command: bin/./app
+    env_file: .env
+    volumes:
+     - ./:/root
+    working_dir: /root
+    ports:
+     - 8080:8080

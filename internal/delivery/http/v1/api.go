@@ -44,7 +44,7 @@ func (h *Http) parse() (message *Message, err error) {
 		panic(err)
 	}
 
-	// logger.LogFile.Println(fmt.Sprintf("%s", body))
+	logger.LogFile.Println(fmt.Sprintf("%s", body))
 
 	return message, err
 

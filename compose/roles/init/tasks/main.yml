@@ -5,3 +5,8 @@
     dest: '{{ playbook_dir }}/../docker-compose.override.yml'
   when: connection == "local"
 
+- name: Create config from template
+  template:
+    src: any-config.yml.j2
+    dest: '{{ playbook_dir }}/../any-config.yml'
+  when: connection == "local"
